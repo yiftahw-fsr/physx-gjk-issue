@@ -25,19 +25,19 @@ int main() {
     PxMaterial *material = physx->createMaterial(0.0f, 5.0f, 0.0f);
 
     // Load actors from OBJ files and hard coded poses
-    constexpr std::string_view p3l0_name = "p3l_0";
-    constexpr std::string_view p3l1_name = "p3l_1";
-    constexpr std::string_view p3r_name = "p3r";
+    constexpr std::string_view actor_left_0_name = "actor_left_0";
+    constexpr std::string_view actor_left_1_name = "actor_left_1";
+    constexpr std::string_view actor_right_name = "actor_right";
 
-    constexpr std::string_view p3l_filename = "p3l.obj";
-    constexpr std::string_view p3r_filename = "p3r.obj";
+    constexpr std::string_view actor_left_filename = "actor_left.obj";
+    constexpr std::string_view actor_right_filename = "actor_right.obj";
 
-    std::array<PxTransform, 2> p3l_poses {
+    std::array<PxTransform, 2> actor_left_poses {
         PxTransform{PxVec3{-382.41943359,-36.63606644,538.67352295}, PxQuat{0.90120637,-0.04327928,-0.26553822,-0.33976975}},
         PxTransform{PxVec3{-382.51943359,-36.63606644,538.67352295}, PxQuat{0.90120637,-0.04327928,-0.26553822,-0.33976975}}
     };
 
-    PxTransform p3r_pose {PxVec3{-78.02865601,328.71896362,584.83435059}, PxQuat{0.70096153,-0.47570169,-0.52838022,0.05634902}};
+    PxTransform actor_right_pose {PxVec3{-78.02865601,328.71896362,584.83435059}, PxQuat{0.70096153,-0.47570169,-0.52838022,0.05634902}};
 
     std::map<std::string_view, PxRigidDynamic*> actorMap;
     auto createActor = [&](const std::string_view& name, const std::string_view& filename, const PxTransform& pose) {
@@ -49,16 +49,16 @@ int main() {
         std::cout << "Loaded Obj from " << filename << "\n";
     };
 
-    createActor(p3l0_name, p3l_filename, p3l_poses[0]);
-    createActor(p3l1_name, p3l_filename, p3l_poses[1]);
-    createActor(p3r_name, p3r_filename, p3r_pose);
+    createActor(actor_left_0_name, actor_left_filename, actor_left_poses[0]);
+    createActor(actor_left_1_name, actor_left_filename, actor_left_poses[1]);
+    createActor(actor_right_name, actor_right_filename, actor_right_pose);
 
-    auto result0 = phylib::proximityBetweenDynamics(actorMap[p3l0_name], actorMap[p3r_name]);
-    std::cout << "Proximity between " << p3l0_name << " and " << p3r_name << ":\n";
+    auto result0 = phylib::proximityBetweenDynamics(actorMap[actor_left_0_name], actorMap[actor_right_name]);
+    std::cout << "Proximity between " << actor_left_0_name << " and " << actor_right_name << ":\n";
     std::cout << result0.to_string() << "\n";
 
-    auto result1 = phylib::proximityBetweenDynamics(actorMap[p3l1_name], actorMap[p3r_name]);
-    std::cout << "Proximity between " << p3l1_name << " and " << p3r_name << ":\n";
+    auto result1 = phylib::proximityBetweenDynamics(actorMap[actor_left_1_name], actorMap[actor_right_name]);
+    std::cout << "Proximity between " << actor_left_1_name << " and " << actor_right_name << ":\n";
     std::cout << result1.to_string() << "\n";
 
 

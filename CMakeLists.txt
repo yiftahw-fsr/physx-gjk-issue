@@ -36,6 +36,6 @@ target_link_directories(test_gjk PRIVATE ${PHYSX_LIB_DIR})
 add_custom_command(
     TARGET test_gjk POST_BUILD
     COMMENT "Copying PhysX shared libraries to output directory"
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/obj/p3l.obj ${CMAKE_BINARY_DIR}
-    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/obj/p3r.obj ${CMAKE_BINARY_DIR}
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/obj/actor_left.obj ${CMAKE_BINARY_DIR}
+    COMMAND ${CMAKE_COMMAND} -E copy_if_different ${CMAKE_SOURCE_DIR}/obj/actor_right.obj ${CMAKE_BINARY_DIR}
 )
